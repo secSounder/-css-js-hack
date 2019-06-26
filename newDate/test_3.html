@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="ipt">
+    <p>在chrom浏览器中，正确显示日期2019-06-27</p>
+    <p>在ie8及以上浏览器中，正确显示日期2019-06-27</p>
+    <p>在ie6浏览器中，报错</p>
+</body>
+<script>
+    var ipt = document.getElementById("ipt");
+    var val = new Date();
+    val.setMinutes(val.getMinutes() - val.getTimezoneOffset() + 24 * 60); //获取明天 需要多加24小时*60分钟
+    ipt.value = val.toJSON().slice(0, 10) + ' 00:00:00'
+</script>
+</html>

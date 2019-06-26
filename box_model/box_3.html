@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>盒模型3</title>
+</head>
+<style>
+    .box_model {
+        display: inline-block;
+        background: green;
+        width: 100px;
+        height: 100px;
+        padding: 10px;
+        border: 1px solid red;
+    }
+</style>
+
+<body>
+    <div>
+        <p>该盒模型设置width: 100px; height: 100px;</p>
+        <div class="box_model">
+
+        </div>
+        <p>学习：</p>
+        <p>(1)在chrom中，实际宽为122px;高122px;</p>
+        <p>(2)在ie8及以上中，实际宽为122px;高122px;</p>
+        <p>(3)在ie6中，实际宽为122px;高122px;</p>
+    </div>
+</body>
+
+</html>
