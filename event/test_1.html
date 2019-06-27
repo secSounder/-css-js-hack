@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    #box_model,
+    #box_model1,
+    #box_model2 {
+        display: inline-block;
+        background: green;
+        width: 100px;
+        height: 100px;
+    }
+
+    #btn,
+    #btn1,
+    #btn2 {
+        display: inline-block;
+        background: red;
+        width: 50px;
+        height: 50px;
+    }
+</style>
+
+<body>
+    <p>
+        事件处理的冒泡阶段:
+    </p>
+    <div id="box_model">
+        <div id="btn">点我
+        </div>
+    </div>
+
+    <p>
+        事件处理的捕获阶段:
+    </p>
+    <div id="box_model1">
+        <div id="btn1">点我
+        </div>
+    </div>
+
+    <p>
+        在事件处理函数内部，this关键字引用当前元素:
+    </p>
+    <div id="box_model2">
+        <span id="btn2">点我
+        </span>
+    </div>
+
+    <p>ie不支持</p>
+</body>
+<script>
+    var model = document.getElementById("box_model");
+    var btn = document.getElementById("btn");
+    btn.addEventListener('click', function (e) {
+        alert("btn 被点击" )
+        e.stopPropagation();
+    }, false)
+    model.addEventListener('click', function (e) {
+        alert("model 被点击")
+    }, false)
+
+
+    var model1 = document.getElementById("box_model1");
+    var btn1 = document.getElementById("btn1");
+    btn1.addEventListener('click', function (e) {
+        alert("btn 被点击")
+    }, true)
+    model1.addEventListener('click', function (e) {
+        alert("model 被点击")
+    }, true)
+
+
+
+    var model2 = document.getElementById("box_model2");
+    var btn2 = document.getElementById("btn2");
+    btn2.addEventListener('click', function (e) {
+        alert("函数内this关键字指向："+this)
+    }, false)
+    btn2.addEventListener('click', function (e) {
+        alert("多个事件，并且阻止冒泡")
+        e.stopPropagation();
+    }, false)
+    model2.addEventListener('click', function (e) {
+        alert("model 被点击")
+    }, false)
+</script>
+
+</html>

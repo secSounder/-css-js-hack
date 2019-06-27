@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    #box_model,
+    #box_model1,
+    #box_model2 {
+        display: inline-block;
+        background: green;
+        width: 100px;
+        height: 100px;
+    }
+
+    #btn,
+    #btn1,
+    #btn2 {
+        display: inline-block;
+        background: red;
+        width: 50px;
+        height: 50px;
+    }
+
+    #aaa {
+        background: green;
+    }
+</style>
+
+<body>
+    <p>兼容写法</p>
+    <div id="box_model">
+        <div id="btn">点我
+        </div>
+    </div>
+
+</body>
+<script>
+    var eventshiv = {
+        // event兼容
+        getEvent: function (event) {
+            return event ? event : window.event;
+        },
+
+        // type兼容
+        getType: function (event) {
+            return event.type;
+        },
+
+        // target兼容
+        getTarget: function (event) {
+            return event.target ? event.target : event.srcelem;
+        },
+
+        // 添加事件句柄
+        addHandler: function (elem, type, listener) {
+            if (elem.addEventListener) {
+                elem.addEventListener(type, listener, false);
+            } else if (elem.attachEvent) {
+                elem.attachEvent('on' + type, listener);
+            } else {
+                // 在这里由于.与'on'字符串不能链接，只能用 []
+                elem['on' + type] = listener;
+            }
+        },
+
+        // 移除事件句柄
+        removeHandler: function (elem, type, listener) {
+            if (elem.removeEventListener) {
+                elem.removeEventListener(type, listener, false);
+            } else if (elem.detachEvent) {
+                elem.detachEvent('on' + type, listener);
+            } else {
+                elem['on' + type] = null;
+            }
+        },
+
+        // 添加事件代理
+        addAgent: function (elem, type, agent, listener) {
+            elem.addEventListener(type, function (e) {
+                if (e.target.matches(agent)) {
+                    listener.call(e.target, e); // this 指向 e.target
+                }
+            });
+        },
+
+        // 取消默认行为
+        preventDefault: function (event) {
+            if (event.preventDefault) {
+                event.preventDefault();
+            } else {
+                event.returnValue = false;
+            }
+        },
+
+        // 阻止事件冒泡
+        stopPropagation: function (event) {
+            console.log(event);
+            if (event.stopPropagation) {
+                event.stopPropagation();
+            } else {
+                event.cancelBubble = true;
+            }
+        }
+    };
+
+    var model = document.getElementById("box_model");
+    var btn = document.getElementById("btn");
+    eventshiv.addHandler(btn, "click", function (event) {
+        var event = eventshiv.getEvent(event);
+        var type = event.type;
+        alert(type);
+        alert("btn 被点击，同时阻止冒泡")
+        eventshiv.stopPropagation(event)
+    })
+    eventshiv.addHandler(model, "click", function () {
+        alert("model 被点击")
+    })
+</script>
+
+</html>
