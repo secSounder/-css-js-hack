@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="text" name="" id="ipt1">
+    <input type="text" name="" id="ipt2">
+    <input type="text" name="" id="ipt3">
+    <input type="text" name="" id="ipt4">
+    <input type="text" name="" id="ipt5">
+    <input type="text" name="" id="ipt6">
+    <input type="text" name="" id="ipt7">
+</body>
+<script>
+    var ipt1 = document.getElementById("ipt1");
+    var ipt2 = document.getElementById("ipt2");
+    var ipt3 = document.getElementById("ipt3");
+    var ipt4 = document.getElementById("ipt4");
+    var ipt5 = document.getElementById("ipt5");
+    var ipt6 = document.getElementById("ipt6");
+    var ipt7 = document.getElementById("ipt7");
+    // 浏览器窗口可视区域大小（不包括工具栏和滚动条等边线）
+    // 1600 * 525
+    var client_w = document.documentElement.clientWidth || document.body.clientWidth;
+    var client_h = document.documentElement.clientHeight || document.body.clientHeight;
+
+    // 网页内容实际宽高（包括工具栏和滚动条等边线）
+    // 1600 * 8
+    var scroll_w = document.documentElement.scrollWidth || document.body.scrollWidth;
+    var scroll_h = document.documentElement.scrollHeight || document.body.scrollHeight;
+
+    // 网页内容实际宽高 (不包括工具栏和滚动条等边线）
+    // 1600 * 8
+    var offset_w = document.documentElement.offsetWidth || document.body.offsetWidth;
+    var offset_h = document.documentElement.offsetHeight || document.body.offsetHeight;
+
+    // 滚动的高度
+    var scroll_Top = document.documentElement.scrollTop || document.body.scrollTop;
+
+    ipt1.value = client_w;
+    ipt2.value = client_h;
+    ipt3.value = scroll_w;
+    ipt4.value = scroll_h;
+    ipt5.value = offset_w;
+    ipt6.value = offset_h;
+    ipt7.value = scroll_Top;
+</script>
+
+</html>
